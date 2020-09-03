@@ -2,16 +2,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie API</title>
+   
 </head>
 <body>
  <h1>
      HOW TO USE MY API
  </h1>
-    <div class="mainins">
-        <h3>
-        This API will be used for movie applications. With a wide Variety of Movie titles,<br> this API will be easy and convenient to use.
-    </h3>
+ <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+    <table>
+    <tr>
+    <th>Request</th>
+    <th>URL</th>
+    <th>http method</th>
+   
+</tr>
 
-    </div>
+<tr>
+    <td>Return a list of ALL movies to the user</td>
+    <td> /movies </td>
+    <td>GET</td>
+</tr>
+<tr>
+    <td>Return data about a genre</td>
+    <td>movies/genre/:name</td>
+    <td>GET</td>
+</tr>
+<tr>
+    <td>Return data about a director by name</td>
+    <td>movies/director/:name</td>
+    <td>GET</td>
+</tr>
+<tr>
+    <td>Allow new users to register</td>
+    <td>/users</td>
+    <td>POST</td>
+</tr>
+<tr>
+    <td>Allow users to update their user info</td>
+    <td>/users/:id</td>
+    <td>PUT</td>
+</tr>
+<tr>
+    <td>Allow users to add a movie to their list of favorites</td>
+    <td>/favorites/:username/:movieId</td>
+    <td>DELETE</td>
+</tr>
+<tr>
+    <td>Allow users to remove a movie from their list of favorites</td>
+    <td>/favorites/:username/:movieId</td>
+    <td>DELETE</td>
+</tr>
+<tr>
+    <td>Allow existing users to deregister</td>
+    <td>/users/:username</td>
+    <td>DELETE</td>
+</tr>
+</table>
+    
 
-</body></html>
+</body>
+
+</html>
