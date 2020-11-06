@@ -1,0 +1,203 @@
+user1 = {
+  Username: "nudge",
+  Password: "password123",
+  Email: "Nathan@gmail.com",
+  Birthday: "27/08/2004",
+  FavouriteMovies: []
+}
+db.movies.insertOne(user1)
+
+user2 = {
+  Username: "shane",
+  Password: "pass12",
+  Email: "shane@gmail.com",
+  Birthday: "28/08/2015",
+  FavouriteMovies: ["Goodfellas"]
+}
+db.users.insertOne(user2)
+
+user3 = {
+  Username: "jeff",
+  Password: "pword",
+  Email: "jeff@gmail.com",
+  Birthday: "14/11/2000",
+  FavouriteMovies: ["Baby Driver"]
+}
+db.users.insertOne(user3)
+
+
+var movie2 = {
+  Title: "Goodfellas",
+  Description: "Young Henry Hill, with his friends Jimmy and Tommy, begins the climb from being a petty criminal to a gangster on the mean streets of New York.",
+  Genre: {
+    Name: "Crime",
+    Description: "Crime fiction, detective story, murder mystery, mystery novel, and police novel: These terms all describe narratives that centre on criminal acts and especially on the investigation, either by an amateur or a professional detective, of a serious crime, generally a murder."
+  },
+  Director: {
+    Name: "Martin Scorsese",
+    Bio: "Martin Charles Scorsese is an American film director, producer, screenwriter, and actor.",
+    Birth: "1942"
+  },
+  ImagePath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkuxYKBhyPQq4e_cbYRDfZRjWkUx2GIKlUpUkHiuVeLg2GhN0D",
+  Featured: true
+}
+
+db.movies.insertOne(movie2)
+
+
+var movie3 = {
+  Title: "War Dogs",
+  Description: "Loosely based on the true story of two young men, David Packouz and Efraim Diveroli, who won a three hundred million dollar contract from the Pentagon to arm America's allies in Afghanistan.",
+  Genre: {
+    Name: "War",
+    Description: "War film is a film genre concerned with warfare, typically about naval, air, or land battles, with combat scenes central to the drama. It has been strongly associated with the 20th century."
+  },
+  Director: {
+    Name: "Todd Phillips",
+    Bio: "Todd Phillips is an American film director, producer, screenwriter, and actor.",
+    Birth: "1970",
+  },
+  ImagePath: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS7OA1g4WjMzirskF-SKBY2AiqjQnK0OMz-6iX8U9Wyli3U0vP4",
+  Featured: true
+}
+
+db.movies.insertOne(movie3)
+
+
+var movie4 = {
+  Title: "The Nun",
+  Description: "A priest with a haunted past and a novice on the threshold of her final vows are sent by the Vatican to investigate the death of a young nun in Romania and confront a malevolent force in the form of a demonic nun.",
+  Genre: {
+    Name: "Horror",
+    Description: "A horror film is one that seeks to elicit fear in its audience, for entertainment purposes. Initially inspired by literature from authors such as Edgar Allan Poe, Bram Stoker, and Mary Shelley, horror has existed as a film genre for more than a century. The macabre and the supernatural are frequent themes."
+  },
+  Director: {
+    Name: "Corin Hardy",
+    Bio: "Corin Hardy is an English film director. He made his directorial debut with the 2015 horror film The Hallow, which he also co-wrote.",
+    Birth: "1975"
+  },
+  ImagePath: "https://www.movienewsletters.net/photos/246316R1.jpg",
+  Featured: true
+}
+
+db.movies.insertOne(movie4)
+
+
+var movie5 = {
+  Title: "The Irishman",
+  Description: "In the 1950s, truck driver Frank Sheeran gets involved with Russell Bufalino and his Pennsylvania crime family. As Sheeran climbs the ranks to become a top hit man, he also goes to work for Jimmy Hoffa -- a powerful Teamster tied to organized crime.",
+  Genre: {
+    Name: "Crime",
+    Description: "Crime fiction, detective story, murder mystery, mystery novel, and police novel: These terms all describe narratives that centre on criminal acts and especially on the investigation, either by an amateur or a professional detective, of a serious crime, generally a murder."
+  },
+  Director: {
+    Name: "Martin Scorsese",
+    Bio: "Martin Charles Scorsese is an American film director, producer, screenwriter, and actor.",
+    Birth: "1942"
+  },
+  ImagePath: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT1OvwszdIz_Vc79PbB5El6tKdFdOGwHJZCOoKbbPVtyYZtyFC4",
+  Featured: true
+}
+
+db.movies.insertOne(movie5)
+
+
+var movie6 = {
+  Title: "Baby Driver",
+  Description: "Doc forces Baby, a former getaway driver, to partake in a heist, threatening to hurt his girlfriend if he refuses. But the plan goes awry when their arms dealers turn out to be undercover officers.",
+  Genre: {
+    Name: "Action",
+    Description: "Action film is a film genre in which the protagonist or protagonists end up in a series of challenges that typically include violence, close combat, physical feats and frantic chases."
+  },
+  Director: {
+    Name: "Edgar Wright",
+    Bio: "Edgar Howard Wright is an English director, screenwriter and producer.",
+    Birth: "1974"
+  },
+  ImagePath: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQluwvAAFCa_AXrK6Aex_5zbStjGjLwixcX1zhUYsItB0Gdw5_I",
+  Featured: true
+}
+
+db.movies.insertOne(movie6)
+
+
+var movie7 = {
+  Title: "The Hangover",
+  Description: "Doug and his three best men go to Las Vegas to celebrate his bachelor party. However, the three best men wake up the next day with a hangover and realise that Doug is missing.",
+  Genre: {
+    Name: "Comedy",
+    Description: "Comedy may be divided into multiple genres based on the source of humor, the method of delivery, and the context in which it is delivered. These classifications overlap, and most comedians can fit into multiple genres."
+  },
+  Director: {
+    Name: "Todd Phillips",
+    Bio: "Todd Phillips is an American film director, producer, screenwriter, and actor.",
+    Birth: "1970"
+  },
+  ImagePath: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcScAfVuTRv3PXG_TzoWXTw2QjM5l_vSG00wip90HpZp2cPidh0t",
+  Featured: true
+}
+
+db.movies.insertOne(movie7)
+
+
+var movie8 = {
+  Title: "Pearl Harbor",
+  Description: "Childhood friends Rafe and Danny become army pilots and meet Evelyn, a navy nurse. However, the three of them later find themselves in the middle of the attack on Pearl Harbour during World War II.",
+  Genre: {
+    Name: "War",
+    Description: "War film is a film genre concerned with warfare, typically about naval, air, or land battles, with combat scenes central to the drama. It has been strongly associated with the 20th century. The fateful nature of battle scenes means that war films often end with them."
+  },
+  Director: {
+    Name: "Michael Bay",
+    Bio: "Michael Benjamin Bay is an American film director and producer.",
+    Birth: "1965"
+  },
+  ImagePath: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTMuRKM5K6r1aqLVq_Ixrcg9SVkyjgmMQ9UGH_ABbCOQO5whfm8",
+  Featured: true
+}
+
+db.movies.insertOne(movie8)
+
+
+var movie9 = {
+  Title: "The Wolf of Wall Street",
+  Description: "Introduced to life in the fast lane through stockbroking, Jordan Belfort takes a hit after a Wall Street crash. He teams up with Donnie Azoff, cheating his way to the top as his relationships slide",
+  Genre: {
+    Name: "Crime",
+    Description: "Crime fiction, detective story, murder mystery, mystery novel, and police novel: These terms all describe narratives that centre on criminal acts and especially on the investigation, either by an amateur or a professional detective, of a serious crime, generally a murder."
+  },
+  Director: {
+    Name: "Martin Scorsese",
+    Bio: "Martin Charles Scorsese is an American film director, producer, screenwriter, and actor.",
+    Birth: "1942"
+  },
+  ImagePath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2R_HuoCogDkrQSwH6hS71G84IcpBqPYwCMGTYY_3R8GKraea-",
+  Featured: true
+}
+
+db.movies.insertOne(movie9)
+
+
+var movie10 = {
+  Title: "Knocked Up",
+  Description: "Alison, a TV Host, and Ben, a jobless man, end up having a one-night stand. Alison soon discovers that she is pregnant with Ben's child and they must decide on their priorities and make a choice.",
+  Genre: {
+    Name: "Comedy",
+    Description: "Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect."
+  },
+  Director: {
+    Name: "Judd Apatow",
+    Bio: "Judd Mann Apatow is an American film director, producer, screenwriter, and comedian.",
+    Birth: "1967"
+  },
+  ImagePath: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr-6Xs4hPwcbaxUR3RE4W7MzSlP5mYqgtMZzg7FgWLK2H2cHzj",
+  Featured: true
+}
+
+db.movies.insertOne(movie10)
+
+
+db.users.update(
+  { _id: ObjectId("5f7d0fcb56ccf162dcbf1141") }, 
+  { $set: { FavouriteMovies: "The Irishman"} }
+)
