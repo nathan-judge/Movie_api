@@ -123,16 +123,18 @@ app.get("/movies/director/:name", passport.authenticate('jwt', { session: false 
     });
   });
 
+
+// site listen text 
+app.listen(8080, () => {
+console.log('Your app is listening on port 8080.');
+});
+
 // site error text 
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
 
-// site listen text 
-app.listen(8080, () => {
-console.log('Your app is listening on port 8080.');
-});
 
 // Adds data for a new user
 app.post('/users', (req, res) => {
