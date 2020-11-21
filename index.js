@@ -1,3 +1,5 @@
+const cors = require('cors');
+app.use(cors());
 const express = require('express');
 const morgan = require("morgan");
 const fs = require('fs');
@@ -11,6 +13,23 @@ require('./passport');
 
 const Movies = Models.Movie;
 const Users = Models.User;
+const bcrypt = require('bcrypt');
+
+let userSchema = mongoose.Schema({
+  Username: {type: String, required: true},
+  Password: {type: String, required: true},
+  Email: {type: String, required: true},
+  Birthday: Date,
+  FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
+});
+
+userSchema.statics.hashPassword = (password) => {
+  return bcrypt.hashSync(password, 10);
+};
+
+userSchema.methods.validatePassword = function(password) {
+  return bcrypt.compareSync(password, this.Password);
+};
 const Genres = Models.Genres;
 const Directors = Models.directors;
 
@@ -138,29 +157,31 @@ app.use((err, req, res, next) => {
 
 // Adds data for a new user
 app.post('/users', (req, res) => {
-Users.findOne({ Username: req.body.Username })
-  .then((user) => {
-    if (user) {
-      return res.status(400).send(req.body.Username + 'already exists');
-    } else {
-      Users
-        .create({
-          Username: req.body.Username,
-          Password: req.body.Password,
-          Email: req.body.Email,
-          Birthday: req.body.Birthday
-        })
-        .then((user) =>{res.status(201).json(user) })
-      .catch((error) => {
-        console.error(error);
-        res.status(500).send('Error: ' + error);
-      })
-    }
-  })
-  .catch((error) => {
-    console.error(error);
-    res.status(500).send('Error: ' + error);
-  });
+  let hashedPassword = Users.hashPassword(req.body.Password);
+  Users.findOne({ Username: req.body.Username }) // Search to see if a user with the requested username already exists
+    .then((user) => {
+      if (user) {
+      //If the user is found, send a response that it already exists
+        return res.status(400).send(req.body.Username + ' already exists');
+      } else {
+        Users
+          .create({
+            Username: req.body.Username,
+            Password: hashedPassword,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+          })
+          .then((user) => { res.status(201).json(user) })
+          .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
 });
 
 // Adds movie to favorites for a user 
