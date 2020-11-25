@@ -21,7 +21,7 @@ const { check, validationResult } = require('express-validator');
 const Genres = Models.Genres;
 const Directors = Models.directors;
 
-mongoose.connect('mongodb+srv://njudge:TU9S6zJ8buMxrin@bigscreendb.91edx.mongodb.net/bigscreenDB?retryWrites=true&w=majority', { 
+mongoose.connect(process.env.CONNECTION_URI, { 
   useNewUrlParser: true,
   useUnifiedTopology: true
  });
