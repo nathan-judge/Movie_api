@@ -1,6 +1,6 @@
 
 const cors = require('cors');
-app.use(cors());
+
 const express = require('express');
 const morgan = require("morgan");
 const fs = require('fs');
@@ -21,7 +21,7 @@ const { check, validationResult } = require('express-validator');
 const Genres = Models.Genres;
 const Directors = Models.directors;
 
-mongoose.connect('mongodb://localhost:27017/test', { 
+mongoose.connect('mongodb+srv://njudge:TU9S6zJ8buMxrin@bigscreendb.91edx.mongodb.net/bigscreenDB?retryWrites=true&w=majority', { 
   useNewUrlParser: true,
   useUnifiedTopology: true
  });
@@ -29,7 +29,7 @@ mongoose.connect('mongodb://localhost:27017/test', {
  app.use(bodyParser.urlencoded({
   extended: true
 }));
-
+app.use(cors());
 app.use(bodyParser.json());
 
 let auth = require('./auth')(app);
