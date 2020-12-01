@@ -1,4 +1,4 @@
-allowed_domains = ["*"]
+
 const cors = require('cors');
 
 const express = require('express');
@@ -26,11 +26,9 @@ mongoose.connect(process.env.CONNECTION_URI, {
   useUnifiedTopology: true
 });
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
 
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234/'];
+
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -42,6 +40,11 @@ app.use(cors({
     return callback(null, true);
   }
 }));
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
 app.use(bodyParser.json());
 
 let auth = require('./auth')(app);
