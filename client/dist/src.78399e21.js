@@ -31609,7 +31609,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var _this = this;
 
-      _axios.default.get('<my-api-endpoint/movies>').then(function (response) {
+      _axios.default.get('https://bigscreen.herokuapp.com/movies').then(function (response) {
         // Assign the result to the state
         _this.setState({
           movies: response.data
