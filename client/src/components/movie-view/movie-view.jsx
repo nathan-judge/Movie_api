@@ -45,11 +45,6 @@ export class MovieView extends React.Component {
             <Button variant="link">Back</Button>
           </Link>
         </div>
-        <div className="profile">
-          <Link to={`/profile-view`}>
-            <Button variant="link">profile</Button>
-          </Link>
-        </div>
       </div>
 
 

@@ -36383,13 +36383,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         to: "/"
       }, _react.default.createElement(_Button.default, {
         variant: "link"
-      }, "Back"))), _react.default.createElement("div", {
-        className: "profile"
-      }, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/profile-view"
-      }, _react.default.createElement(_Button.default, {
-        variant: "link"
-      }, "profile"))));
+      }, "Back"))));
     }
   }]);
 
@@ -37658,6 +37652,8 @@ require("./registration-view.scss");
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _reactRouterDom = require("react-router-dom");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -37690,7 +37686,7 @@ function RegistrationView(props) {
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
 
-    _axios.default.post('YOUR_API_URL/users', {
+    _axios.default.post('https://bigscreen.herokuapp.com/users', {
       Username: username,
       Password: password,
       Email: email,
@@ -37716,12 +37712,14 @@ function RegistrationView(props) {
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     }
-  })), _react.default.createElement("button", {
+  })), _react.default.createElement(_reactRouterDom.Link, {
+    to: "/main-view"
+  }, _react.default.createElement("button", {
     type: "button",
     onClick: handleSubmit
-  }, "Register"));
+  }, "Register")));
 }
-},{"react":"../node_modules/react/index.js","./registration-view.scss":"components/registration-view/registration-view.scss","axios":"../node_modules/axios/index.js"}],"../node_modules/invariant/browser.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./registration-view.scss":"components/registration-view/registration-view.scss","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"../node_modules/invariant/browser.js":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -51310,6 +51308,8 @@ var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 var _reactRouterDom = require("react-router-dom");
 
+var _axios = _interopRequireDefault(require("axios"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -51345,36 +51345,65 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ProfileView);
 
     _this = _super.call(this);
-    _this.state = {};
+    _this.state = {
+      userInfo: null
+    };
     return _this;
   }
 
   _createClass(ProfileView, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var token = localStorage.getItem('token');
+
+      _axios.default.get("https://bigscreen.herokuapp.com/users/".concat(this.props.user), {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        // Assign the result to the state
+        _this2.setState({
+          userInfo: response.data
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
           user = _this$props.user,
           goBack = _this$props.goBack;
-      if (!user) return null;
+      var userInfo = this.state.userInfo;
+      if (!user || !userInfo) return null;
       return _react.default.createElement("div", {
         className: "user-view"
       }, _react.default.createElement("div", {
         className: "user-name"
       }, _react.default.createElement("span", {
         className: "value"
-      }, user.Username)), _react.default.createElement("div", {
+      }, userInfo.Username)), _react.default.createElement("div", {
         className: "user-email"
       }, _react.default.createElement("span", {
         className: "label"
       }, "Linked Email: "), _react.default.createElement("span", {
         className: "value"
-      }, user.Email)), _react.default.createElement("div", {
+      }, userInfo.Email)), _react.default.createElement("div", {
+        className: "user-birthday"
+      }, _react.default.createElement("span", {
+        className: "label"
+      }, "Birthday "), _react.default.createElement("span", {
+        className: "value"
+      }, userInfo.Birthday)), _react.default.createElement("div", {
         className: "user-favmovies"
       }, _react.default.createElement("span", {
         className: "label"
       }, "Favorite Movies: "), _react.default.createElement("span", {
         className: "value"
-      }, user.FavoriteMovies)), _react.default.createElement("div", {
+      }, userInfo.FavoriteMovies)), _react.default.createElement("div", {
         className: "backbtn"
       }, _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
@@ -51388,7 +51417,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.ProfileView = ProfileView;
-},{"react":"../node_modules/react/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../node_modules/axios/index.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51415,6 +51444,8 @@ var _genreView = require("../genre-view/genre-view");
 var _directorView = require("../director-view/director-view");
 
 var _profileView = require("../profile-view/profile-view");
+
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51451,6 +51482,18 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MainView);
 
     _this = _super.call(this);
+
+    _this.onLoggedOut = function (authData) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+
+      _this.setState({
+        user: null
+      });
+
+      window.open('/');
+    };
+
     _this.state = {
       movies: [],
       user: null
@@ -51524,7 +51567,20 @@ var MainView = /*#__PURE__*/function (_React$Component) {
               return _this3.onLoggedIn(user);
             }
           });
-          return movies.map(function (movie) {
+          return _react.default.createElement("div", null, _react.default.createElement("div", {
+            className: "profile"
+          }, _react.default.createElement(_reactRouterDom.Link, {
+            to: "/users/".concat(user)
+          }, _react.default.createElement(_Button.default, {
+            variant: "link"
+          }, "Profile"))), _react.default.createElement("div", {
+            className: "logout"
+          }, _react.default.createElement(_reactRouterDom.Link, {
+            to: ""
+          }, _react.default.createElement(_Button.default, {
+            variant: "link",
+            onClick: _this3.onLoggedOut
+          }, "LogOut"))), movies.map(function (movie) {
             return _react.default.createElement(_movieCard.MovieCard, {
               key: movie._id,
               movie: movie,
@@ -51532,7 +51588,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
                 return _this3.onMovieClick(movie);
               }
             });
-          });
+          }));
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/register",
@@ -51587,9 +51643,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             className: "main-view"
           });
           return _react.default.createElement(_profileView.ProfileView, {
-            user: users.find(function (m) {
-              return m.User.Username === match.params.Username;
-            }).User
+            user: user
           });
         }
       })));
@@ -51600,7 +51654,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MainView = MainView;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx"}],"index.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -51694,7 +51748,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54511" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65398" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

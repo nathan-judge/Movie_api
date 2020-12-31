@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
+
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { MovieCard } from '../movie-card/movie-card';
@@ -10,6 +11,9 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { GenreView } from '../genre-view/genre-view';
 import { DirectorView } from '../director-view/director-view';
 import { ProfileView } from '../profile-view/profile-view';
+import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+
 
 export class MainView extends React.Component {
 
@@ -58,7 +62,14 @@ export class MainView extends React.Component {
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
   }
-
+  onLoggedOut = (authData) => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user: null,
+    });
+    window.open('/');
+  }
   render() {
     const { movies, user } = this.state;
 
@@ -72,7 +83,21 @@ export class MainView extends React.Component {
 
         <Route exact path="/" render={() => {
           if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-          return movies.map(movie => <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />)
+          return <div>
+            <div className="profile">
+              <Link to={`/users/${user}`}>
+                <Button variant="link">Profile</Button>
+              </Link>
+            </div>
+            <div className="logout">
+              <Link to={``}>
+                <Button variant="link" onClick={this.onLoggedOut}>LogOut</Button>
+              </Link>
+            </div>
+            {
+              movies.map(movie => <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />)
+            }
+          </div>
         }
         } />
         <Route path="/register" render={() => <RegistrationView />} />
@@ -93,7 +118,7 @@ export class MainView extends React.Component {
           } />
           <Route exact path="/users/:Username" render={({ match }) => {
             if (!user) return <div className="main-view" />;
-            return <ProfileView user={users.find(m => m.User.Username === match.params.Username).User} />
+            return <ProfileView user={user} />
           }
           } />
 
@@ -103,4 +128,4 @@ export class MainView extends React.Component {
       </Router>
     );
   }
-}
+} 

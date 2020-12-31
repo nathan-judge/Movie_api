@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import "./registration-view.scss";
 import axios from "axios";
 
+import { Link } from 'react-router-dom';
+
 export function RegistrationView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    axios.post('YOUR_API_URL/users', {
+    axios.post('https://bigscreen.herokuapp.com/users', {
       Username: username,
       Password: password,
       Email: email,
@@ -42,9 +44,11 @@ export function RegistrationView(props) {
           onChange={e => setPassword(e.target.value)}
         />
       </label>
-      <button type="button" onClick={handleSubmit}>
-        Register
+      <Link to={`/main-view`}>
+        <button type="button" onClick={handleSubmit}>
+          Register
             </button>
+      </Link>
     </form>
   );
 }
