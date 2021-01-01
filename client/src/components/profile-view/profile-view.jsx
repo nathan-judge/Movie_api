@@ -42,6 +42,8 @@ export class ProfileView extends React.Component {
         console.log(error);
       });
   }
+
+
   getMovieTitle() {
     axios.get(`https://bigscreen.herokuapp.com/movies`, {
       headers: { Authorization: `Bearer ${token}` }
