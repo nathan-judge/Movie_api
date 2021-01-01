@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 
 export class MovieView extends React.Component {
@@ -10,6 +11,20 @@ export class MovieView extends React.Component {
 
     this.state = {};
   }
+
+  handleSubmit = e => {
+    let token = localStorage.getItem('token');
+    const username = localStorage.getItem('user')
+    axios.put(`https://bigscreen.herokuapp.com/users/${username}/movies/${this.props.movie._id}`, {
+    }, { headers: { Authorization: `Bearer ${token}` } })
+      .then(response => {
+        const data = response.data;
+        console.log(data);
+      })
+      .catch(e => {
+        console.log('error adding to favourite movies')
+      });
+  };
 
   render() {
     const { movie, goBack } = this.props;
@@ -38,7 +53,11 @@ export class MovieView extends React.Component {
           <Link to={`/directors/${movie.Director.Name}`}>
             <Button variant="link">Director</Button>
           </Link>
-
+          <div className="addFavmovies">
+            <Link to={''}>
+              <Button onClick={this.handleSubmit}>Add to favourites</Button>
+            </Link>
+          </div>
         </div>
         <div className="backbtn">
           <Link to={`/`}>

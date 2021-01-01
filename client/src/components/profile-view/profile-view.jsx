@@ -2,6 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Card, Container } from 'react-bootstrap';
 
 
 export class ProfileView extends React.Component {
@@ -11,7 +12,12 @@ export class ProfileView extends React.Component {
     super();
 
     this.state = {
-      userInfo: null
+      Username: null,
+      Password: null,
+      Email: null,
+      Birthday: null,
+      FavoriteMovies: null
+
     };
   }
 
@@ -25,7 +31,24 @@ export class ProfileView extends React.Component {
       .then(response => {
         // Assign the result to the state
         this.setState({
-          userInfo: response.data
+          Username: response.data.Username,
+          Password: response.data.Password,
+          Email: response.data.Email,
+          Birthday: response.data.Birthday,
+          FavoriteMovies: response.data.FavoriteMovies
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  getMovieTitle() {
+    axios.get(`https://bigscreen.herokuapp.com/movies`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        this.setState({
+          movies: response.data
         });
       })
       .catch(function (error) {
@@ -34,45 +57,73 @@ export class ProfileView extends React.Component {
   }
 
 
+  handleSubmit = e => {
+    e.preventDefault();
+    const { Username, Password, Email, Birthday, FavoriteMovies } = this.state
+    axios.put(`https://bigscreen.herokuapp.com/users/${Username}`, {
+      Username: Username,
+      Password: Password,
+      Email: Email,
+      Birthday: Birthday,
+      FavoriteMovies: FavoriteMovies
+    })
+      .then(response => {
+        const data = response.data;
+        console.log(data);
+      })
+      .catch(e => {
+        console.log('error updating the user')
+      });
+  };
+
+
 
   render() {
     const { user, goBack } = this.props;
-    const { userInfo } = this.state
+    const { Username, Password, Email, Birthday, FavoriteMovies, Movies, } = this.state
 
-    if (!user || !userInfo) return null;
+    if (!user || !Username) return null;
 
     return (
       <div className="user-view">
-        <div className="user-name">
-          <span className="value">{userInfo.Username}</span>
-        </div>
-        <div className="user-email">
-          <span className="label">Linked Email: </span>
-          <span className="value">{userInfo.Email}</span>
-        </div>
-        <div className="user-birthday">
-          <span className="label">Birthday </span>
-          <span className="value">{userInfo.Birthday}</span>
-        </div>
-        <div className="user-favmovies">
-          <span className="label">Favorite Movies: </span>
-          <span className="value">{userInfo.FavoriteMovies}</span>
-        </div>
-
-
-        <div className="backbtn">
-          <Link to={`/`}>
-            <Button variant="link">Back</Button>
-          </Link>
-        </div>
-
-
-
+        <Container>
+          <Card style={{ width: '30rem' }}>
+            <Card.Body>
+              <Card.Title>{Username}</Card.Title>
+              <Card.Text>
+                Linked Email:
+                <input
+                  type="text"
+                  value={Email}
+                  onChange={(e) => this.setState({ Email: e.target.value })}
+                />
+              </Card.Text>
+              <Card.Text>
+                Birthday:
+                <input
+                  type="text"
+                  value={Birthday}
+                  onChange={(e) => this.setState({ Birthday: e.target.value })}
+                />
+              </Card.Text>
+              <Card.Text>
+                Password:
+                <input
+                  type="text"
+                  value={Password}
+                  onChange={(e) => this.setState({ Password: e.target.value })}
+                />
+              </Card.Text>
+              <Card.Text>Favourite Movies: {FavoriteMovies}</Card.Text>
+              <div className="backbtn">
+                <Link to={`/`}>
+                  <Button variant="link">Back</Button>
+                </Link>
+              </div>
+            </Card.Body>
+          </Card>
+        </Container>
       </div>
-
-
-
-
     );
   }
 }
