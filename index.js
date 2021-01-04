@@ -1,4 +1,37 @@
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+import MainView from './components/main-view/main-view';
+import moviesApp from './reducers/reducers';
+
+// Import statement to indicate that we need to bundle `./index.scss`
+import './index.scss';
+
+const store = createStore(moviesApp);
+
+// Main component (will eventually use all the others)
+class MyFlixApplication extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <MainView />
+      </Provider>
+    );
+  }
+}
+
+// Find the root of our app
+const path = require("path");
+const container = document.getElementsByClassName('app-container')[0];
+
+// Tell React to render our app in the root DOM element
+ReactDOM.render(React.createElement(MyFlixApplication), container);
+
+const store = createStore(moviesApp);
+
 const cors = require('cors');
 
 const express = require('express');
@@ -30,6 +63,10 @@ mongoose.connect(process.env.CONNECTION_URI, {
 
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
 
+app.use("/client", express.static(path.join(__dirname, "client", "dist")));
+
+app.use(express.static("public"));
+
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
@@ -53,7 +90,9 @@ app.use(methodOverride());
 
 
 // GET requests 
-
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 // Get all users
 app.get('/users', (req, res) => {
   Users.find()
