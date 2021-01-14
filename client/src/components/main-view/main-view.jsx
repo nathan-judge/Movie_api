@@ -11,10 +11,16 @@ import { setMovies } from '../../actions/actions';
 // we haven't written this one yet
 import MoviesList from '../movies-list/movies-list';
 import { MovieView } from '../movie-view/movie-view';
+import { MovieCard } from '../movie-card/movie-card';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
+import { GenreView } from '../genre-view/genre-view';
+import { DirectorView } from '../director-view/director-view';
+import { ProfileView } from '../profile-view/profile-view';
+import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';;
 
-class MainView extends React.Component {
+export class MainView extends React.Component {
 
   constructor() {
     super();
@@ -79,9 +85,7 @@ class MainView extends React.Component {
                 <Button variant="link" onClick={this.onLoggedOut}>LogOut</Button>
               </Link>
             </div>
-            {
-              movies.map(movie => <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />)
-            }
+            <MoviesList movies={movies} />
           </div>
         }
         } />

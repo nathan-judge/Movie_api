@@ -12,17 +12,18 @@ export class ProfileView extends React.Component {
     super();
 
     this.state = {
+      movies: [],
       Username: null,
       Password: null,
       Email: null,
       Birthday: null,
-      FavoriteMovies: null
+      FavoriteMovies: []
 
     };
   }
 
 
-  componentDidMount() {
+  componentDidMount = () => {
     let token = localStorage.getItem('token');
 
     axios.get(`https://bigscreen.herokuapp.com/users/${this.props.user}`, {
@@ -41,10 +42,14 @@ export class ProfileView extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
+    this.getMovieTitle()
   }
 
 
+
   getMovieTitle() {
+    let token = localStorage.getItem('token');
+
     axios.get(`https://bigscreen.herokuapp.com/movies`, {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -58,20 +63,47 @@ export class ProfileView extends React.Component {
       });
   }
 
+  getMovies = () => {
+    var favmovies = [];
+    this.state.movies.forEach(movie => {
+      if (this.state.FavoriteMovies.includes(movie._id)) {
+        favmovies.push(movie)
+      }
+    });
+
+    return favmovies
+  }
+
+  deleteFavMovies = movie => {
+    let token = localStorage.getItem('token');
+    const Username = localStorage.getItem('user')
+    axios.delete(`https://bigscreen.herokuapp.com/favorites/${Username}/${movie._id}`,
+      { headers: { Authorization: `Bearer ${token}` } }, {})
+      .then(response => {
+        const data = response.data;
+      })
+      .catch(e => {
+        console.log('error deleting favourite movies')
+      });
+  };
+
 
   handleSubmit = e => {
-    e.preventDefault();
+    let token = localStorage.getItem('token');
     const { Username, Password, Email, Birthday, FavoriteMovies } = this.state
     axios.put(`https://bigscreen.herokuapp.com/users/${Username}`, {
+
       Username: Username,
       Password: Password,
       Email: Email,
       Birthday: Birthday,
       FavoriteMovies: FavoriteMovies
+
+    }, {
+      headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
         const data = response.data;
-        console.log(data);
       })
       .catch(e => {
         console.log('error updating the user')
@@ -81,9 +113,9 @@ export class ProfileView extends React.Component {
 
 
   render() {
-    const { user, goBack } = this.props;
+    const { user, movie } = this.props;
     const { Username, Password, Email, Birthday, FavoriteMovies, Movies, } = this.state
-
+    console.log(this.getMovies())
     if (!user || !Username) return null;
 
     return (
@@ -111,12 +143,33 @@ export class ProfileView extends React.Component {
               <Card.Text>
                 Password:
                 <input
-                  type="text"
+                  type="password"
                   value={Password}
                   onChange={(e) => this.setState({ Password: e.target.value })}
                 />
               </Card.Text>
-              <Card.Text>Favourite Movies: {FavoriteMovies}</Card.Text>
+
+
+
+              <Card.Text>Favourite Movies:</Card.Text>
+
+              {
+                this.getMovies().map((movie, index) => {
+
+                  return <Card.Text key={index}> {movie.Title}
+
+                    <Button onClick={() => this.deleteFavMovies(movie)}>Remove</Button>
+
+                  </Card.Text>
+
+                })
+              }
+
+
+
+
+              <Button type="button" onClick={this.handleSubmit}> update</Button>
+
               <div className="backbtn">
                 <Link to={`/`}>
                   <Button variant="link">Back</Button>

@@ -19,7 +19,6 @@ export class MovieView extends React.Component {
     }, { headers: { Authorization: `Bearer ${token}` } })
       .then(response => {
         const data = response.data;
-        console.log(data);
       })
       .catch(e => {
         console.log('error adding to favourite movies')
@@ -43,6 +42,11 @@ export class MovieView extends React.Component {
           <span className="label">Description: </span>
           <span className="value">{movie.Description}</span>
         </div>
+        <div className="addFavmovies">
+          <Link to={''}>
+            <Button onClick={this.handleSubmit}>Add to favourites</Button>
+          </Link>
+        </div>
 
         <div className="movie-genre">
           <Link to={`/genres/${movie.Genre.Name}`}>
@@ -53,11 +57,7 @@ export class MovieView extends React.Component {
           <Link to={`/directors/${movie.Director.Name}`}>
             <Button variant="link">Director</Button>
           </Link>
-          <div className="addFavmovies">
-            <Link to={''}>
-              <Button onClick={this.handleSubmit}>Add to favourites</Button>
-            </Link>
-          </div>
+
         </div>
         <div className="backbtn">
           <Link to={`/`}>
