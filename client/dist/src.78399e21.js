@@ -40181,6 +40181,16 @@ function RegistrationView(props) {
       password = _useState4[0],
       setPassword = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      email = _useState6[0],
+      setEmail = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(""),
+      _useState8 = _slicedToArray(_useState7, 2),
+      birthday = _useState8[0],
+      setBirthday = _useState8[1];
+
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
 
@@ -40209,6 +40219,18 @@ function RegistrationView(props) {
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
+    }
+  })), _react.default.createElement("label", null, "Email:", _react.default.createElement("input", {
+    type: "text",
+    value: email,
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    }
+  })), _react.default.createElement("label", null, "Birthday:", _react.default.createElement("input", {
+    type: "text",
+    value: birthday,
+    onChange: function onChange(e) {
+      return setBirthday(e.target.value);
     }
   })), _react.default.createElement(_reactRouterDom.Link, {
     to: "/main-view"
@@ -53957,9 +53979,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      var _this$props = this.props,
-          user = _this$props.user,
-          movie = _this$props.movie;
+      var user = this.props.user;
       var _this$state2 = this.state,
           Username = _this$state2.Username,
           Password = _this$state2.Password,

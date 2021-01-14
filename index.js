@@ -251,7 +251,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (r
 });
 
 // Deletes a movie from a user's favorites list by username
-app.delete("/favorites/:username/:movieId", passport.authenticate('jwt', { session: false }), (req, res) => {
+app.delete("/favorites/:username/:movieID", passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate(
     { Username: req.params.username },
     { $pull: { FavoriteMovies: req.params.movieID } },

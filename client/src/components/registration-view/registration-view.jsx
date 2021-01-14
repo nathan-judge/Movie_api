@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 export function RegistrationView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [birthday, setBirthday] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -42,6 +44,22 @@ export function RegistrationView(props) {
           type="password"
           value={password}
           onChange={e => setPassword(e.target.value)}
+        />
+      </label>
+      <label>
+        Email:
+                <input
+          type="text"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+      </label>
+      <label>
+        Birthday:
+                <input
+          type="text"
+          value={birthday}
+          onChange={e => setBirthday(e.target.value)}
         />
       </label>
       <Link to={`/main-view`}>
