@@ -63,6 +63,12 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
+  onLoggedOut() {
+    localStorage.clear();
+    window.location.href = '/client'
+  }
+
+
   render() {
 
     // #2
@@ -81,7 +87,7 @@ export class MainView extends React.Component {
               </Link>
             </div>
             <div className="logout">
-              <Link to={``}>
+              <Link to={`/`}>
                 <Button variant="link" onClick={this.onLoggedOut}>LogOut</Button>
               </Link>
             </div>

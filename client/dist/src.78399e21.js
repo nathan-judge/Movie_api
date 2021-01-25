@@ -54162,6 +54162,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       this.getMovies(authData.token);
     }
   }, {
+    key: "onLoggedOut",
+    value: function onLoggedOut() {
+      localStorage.clear();
+      window.location.href = '/client';
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -54189,7 +54195,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           }, "Profile"))), _react.default.createElement("div", {
             className: "logout"
           }, _react.default.createElement(_reactRouterDom.Link, {
-            to: ""
+            to: "/"
           }, _react.default.createElement(_Button.default, {
             variant: "link",
             onClick: _this3.onLoggedOut
