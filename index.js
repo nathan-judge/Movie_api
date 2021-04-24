@@ -28,7 +28,7 @@ mongoose.connect(process.env.CONNECTION_URI, {
 
 
 
-let allowedOrigins = ['http://localhost:4200'];
+let allowedOrigins = ['*'];
 
 app.use("/client", express.static(path.join(__dirname, "client", "dist")));
 
