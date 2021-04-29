@@ -35,7 +35,15 @@ This project is a React application that allows users to get information about m
 
 welcome page where users can either login to an existing user or register an account 
 
-once a user has been auth
+once a user has been authticated they can veiw movies and acess profile view 
+
+user can view click on a movie and see info about it 
+
+inside the movie view users can also click on the genre button to see more info about the genre, click on the director button to see info about the movies director, or they can click add to favourites which is a list in your profile view of movies you have clicked as your favourite 
+
+users can also click on the profile button to go to the profile view where they can view the favourite movies list and edit their password, email address, or delete movies from the favourite movies list.
+
+users can also logout out of the site 
 
 # technolgy
 Single-Page Application (SPA) using React
