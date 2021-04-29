@@ -5,14 +5,23 @@ Server-side component of a “movies” web application. This project is a REST 
 Endpoints:
 <li>
 return a list of all movies,
-return information about a single movie by its title,
-return information about a movie's genre,
-return information about a movie's director,
-allow a user to sign up,
-allow a user to update their profile information,
-allow a user to add a movie to their favorities,
-allow a user to remove a movie from their favorites, and
+  
+return information about a single movie by its title
+
+return information about a movie's genre
+
+return information about a movie's director
+
+allow a user to sign up
+
+allow a user to update their profile information
+
+allow a user to add a movie to their favorities
+
+allow a user to remove a movie from their favorites
+
 allow a user to delete their account.
+
 <li/>
 # technolgy 
 Code written with Node.js and Express
