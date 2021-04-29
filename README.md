@@ -3,7 +3,7 @@ Server-side component of a “movies” web application. This project is a REST 
 
 # features 
 Endpoints:
-<li>
+
 return a list of all movies,
   
 return information about a single movie by its title
@@ -22,10 +22,9 @@ allow a user to remove a movie from their favorites
 
 allow a user to delete their account.
 
-<li>
 # technolgy 
 Code written with Node.js and Express
-API uses REST architecture
+API uses REST 
 API connects to a MongoDB database
 Information is provided in JSON format
 API authenticates and authorizes user
