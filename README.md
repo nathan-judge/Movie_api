@@ -22,7 +22,7 @@ allow a user to remove a movie from their favorites
 
 allow a user to delete their account.
 
-<li/>
+<li>
 # technolgy 
 Code written with Node.js and Express
 API uses REST architecture
